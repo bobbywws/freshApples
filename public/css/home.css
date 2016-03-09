@@ -1,0 +1,78 @@
+body {
+	background-color: white;
+}
+
+h1 {
+	margin: 0px;
+}
+
+h2 {
+	margin: 0px;
+}
+
+.header {
+	padding: 0px;
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.logoPic {
+	width: 90px;
+	height: 50px;
+	display: inline;
+	padding: 0px;
+}
+
+.adPic1 {
+	width: 300px;
+	height: 150px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.adPic2 {
+	width: 250px;
+	height: 150px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.adPic3 {
+	width: 600px;
+	height: 150px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.navBar {
+	background-color: white;
+	color: black;
+}
+
+.navList {
+	display: inline;
+}
+
+.main {
+	background-color: gray;
+	color: black;
+}
+
+.footer {
+	background-color: #58c68b;
+	color: white;
+	height: 80px;
+	line-height: 80px;
+}
+
+.footerLink {
+	vertical-align: middle;
+}
+
+.footerSocial {
+	display: inline;
+}
+
+.addSubmit {
+	float: right;
+}
