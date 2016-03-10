@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html ng-app="MoviesApp">
+  
+  <head>
+
+    <title>Add A Movie</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
+
+		<script type="text/javascript" src="../js/moviesApp.js"></script>
+
+    <script type="text/javascript" src="../js/moviesApp.mainController.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
+
+    <link rel="stylesheet" type="text/css" href="../css/home.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
+
+	</head>
+
+	<body ng-controller="mainController">
+
+		<div class="container header">
+			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
+			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
+			<a href="https://www.fandango.com"><img src="../images/fandango.jpg" alt="Fandango Ad" class="adPic3"></a>
+		</div>
+		<nav class="navbar navbar-default">
+ 			<div class="container">
+ 			    <div>
+    	  			<ul class="nav navbar-nav">
+    	  				<li><a href="/">Home</a></li>
+        				<li><a href="new">Coming Releases</a></li>
+        				<li><a href="about">How The Appleometer Works</a></li>
+        				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
+        				<li><a href="add">Add A Movie</a></li>
+        				<li class="dropdown">
+          				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In/Register <span class="caret"></span></a>
+          					<ul class="dropdown-menu">
+            					<li><a href="signIn">Sign In</a></li>
+            					<li><a href="register">Register</a></li>
+        	    				<li role="separator" class="divider"></li>
+            					<li><a href="logout">Log Out</a></li>
+          					</ul>
+          				</li>
+      				</ul>
+     			<form class="navbar-form navbar-right" role="search">
+        			<div class="form-group">
+          				<input type="text" class="form-control" placeholder="Search">
+        			</div>
+        			<button type="submit" class="btn btn-default">Submit</button>
+      			</form>
+    			</div>
+  			</div>
+		</nav>
+		<div class="container topRated">
+			<h2 align="center">Thank You For Adding Your Movie To Our Growing Database!</h2>
+      <h4 align="center">You can add another movie if you'd like, or keep browsing the website.</h4>
+		</div>
+		<br>
+		<div class="container">
+			<form ng-submit="createApp()" id="movie-submit-form" action="/added" method="post">
+        		<div class="form-group">
+          			<input ng-model="newMovie.Title" name="title" type="text" placeholder="Title" class="form-control"/>
+        		</div>
+        		<div class="form-group">
+          			<input ng-model="newMovie.Year" name="year" type="text" placeholder="Year" class="form-control"/>
+        		</div>
+        		<div class="form-group">
+          			<input ng-model="newMovie.Rated" name="rated" type="text" placeholder="Rating" class="form-control"/>
+        		</div>
+        		<div class="form-group">
+          			<input ng-model="newMovie.Released" name="released" type="text" placeholder="Release Date" class="form-control"/>
+        		</div>
+        		<div class="form-group">
+          			<input ng-model="newMovie.Runtime" name="runtime" type="text" placeholder="Runtime" class="form-control"/>
+        		</div>
+        		<div class="form-group">
+          			<input ng-model="newMovie.Genre" name="genre" type="text" placeholder="Genre" class="form-control"/>
+        		</div>
+        		<div class="form-group">
+          			<input ng-model="newMovie.Director" name="director" type="text" placeholder="Director" class="form-control"/>
+        		</div>
+				<div class="form-group">
+          			<textarea ng-model="newMovie.Actors"  name="actors" rows="3" placeholder="Actors" class="form-control"></textarea>
+        		</div>
+        		<div class="form-group">
+          			<textarea ng-model="newMovie.Plot"  name="plot" rows="5" placeholder="Plot/Summary (No Spoilers!)" class="form-control"></textarea>
+        		</div>
+        		<div class="form-group">
+        			<input type="submit" class="btn btn-primary btn-lg addSubmit"/>
+        		</div>
+      		</form>
+		</div>
+		<br>
+		<div class="row container-fluid footer">
+			<div align="center" class="col-xs-12 col-lg-4">
+				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>
+			</div>
+			<div align="center" class="col-xs-12 col-lg-4">
+				<a ng-click="createMovie()" href="about" type="button" class="btn btn-primary btn-lg footerLink">About Us</a>
+			</div>
+			<div align="center" class="col-xs-12 col-lg-4">
+				<ul>
+					<li class="footerSocial"><a href="http://www.facebook.com"><img src="../images/facebook.png"></a></li>
+					<li class="footerSocial"><a href="http://www.twitter.com"><img src="../images/twitter.png"></a></li>
+					<li class="footerSocial"><a href="http://www.instagram.com"><img src="../images/instagram.png"></a></li>
+					<li class="footerSocial"><a href="http://www.youtube.com"><img src="../images/youtube.png"></a></li>
+					<li class="footerSocial"><a href="http://www.googleplus.com"><img src="../images/googleplus.png"></a></li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+
+</html>

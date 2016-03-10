@@ -44,7 +44,7 @@
             					<li><a href="signIn">Sign In</a></li>
             					<li><a href="register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-            					<li><a href="premium">Premium Membership</a></li>
+            					<li><a href="logout">Log Out</a></li>
           					</ul>
           				</li>
       				</ul>
@@ -57,13 +57,12 @@
     			</div>
   			</div>
 		</nav>
-		<h1>{{greeting}}</h1>
 		<div class="container topRated">
-			<h2 align="center">Add A Movie To The Database!</h2>
+			<h2 align="center">Add Your Favorite Movie To The Database!</h2>
 		</div>
 		<br>
 		<div class="container">
-			<form ng-submit="createApp()" id="movie-submit-form" action="/movie" method="post">
+			<form ng-submit="createMovie()" id="movie-form" action="/movie" method="post">
         		<div class="form-group">
           			<input ng-model="newMovie.Title" name="title" type="text" placeholder="Title" class="form-control"/>
         		</div>
@@ -92,7 +91,7 @@
           			<textarea ng-model="newMovie.Plot"  name="plot" rows="5" placeholder="Plot/Summary (No Spoilers!)" class="form-control"></textarea>
         		</div>
         		<div class="form-group">
-        			<input type="submit" class="btn btn-primary btn-lg addSubmit"/>
+        			<input ng-click="createMovie()" type="submit" class="btn btn-primary btn-lg addSubmit"/>
         		</div>
       		</form>
 		</div>
@@ -102,7 +101,7 @@
 				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>
 			</div>
 			<div align="center" class="col-xs-12 col-lg-4">
-				<a href="about" type="button" class="btn btn-primary btn-lg footerLink">About Us</a>
+				<a ng-click="createMovie()" href="about" type="button" class="btn btn-primary btn-lg footerLink">About Us</a>
 			</div>
 			<div align="center" class="col-xs-12 col-lg-4">
 				<ul>

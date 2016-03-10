@@ -6,5 +6,4 @@ angular.module('MoviesApp')
 				console.log("Get : ", returnData)
 				$scope.movies = returnData.data
 			})	
-
 	}]);

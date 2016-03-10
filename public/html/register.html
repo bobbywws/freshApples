@@ -44,7 +44,7 @@
             					<li><a href="signIn">Sign In</a></li>
             					<li><a href="register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-            					<li><a href="premium">Premium Membership</a></li>
+            					<li><a href="logout">Log Out</a></li>
           					</ul>
           				</li>
       				</ul>
@@ -59,7 +59,15 @@
 		</nav>
 		<div class="container topRated">
 			<h2 align="center">Register</h2>
+			<h4 class="container" align="center">Registering allows you to create a profile on Fresh Apples, where you can add friends, post reviews, or even review other users reviews!</h4>
 		</div>
+		<br>
+		<form align="center" ng-submit="register()">
+            <input type="text" ng-model="signupForm.username" placeholder="Username"/>
+            <input type="password" ng-model="signupForm.password" placeholder="Password"/>
+            <input type="submit"/>
+        </form>
+        <br>
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
 				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>

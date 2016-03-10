@@ -76,3 +76,8 @@ h2 {
 .addSubmit {
 	float: right;
 }
+
+.freshness {
+	width: 150px;
+	height: 100px;
+}

@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
 var moviesSchema = mongoose.Schema({
 	Title    : String,
@@ -12,4 +12,4 @@ var moviesSchema = mongoose.Schema({
 	Plot     : String,
 });
 
-module.exports = mongoose.model('Movie', moviesSchema);
+module.exports = mongoose.model("Movie", moviesSchema);

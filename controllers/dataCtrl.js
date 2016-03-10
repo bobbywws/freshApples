@@ -3,7 +3,7 @@ var Movie = require("../models/data.js");
 function createMovie (req, res) {
 	var movie = new movie({
 		Title    : req.body.Title,
-		Year     : req.body.Year,
+		Year     : +req.body.Year,
 		Rated    : req.body.Rated,
 		Released : req.body.Released,
 		Runtime  : req.body.Runtime,
@@ -13,6 +13,7 @@ function createMovie (req, res) {
 		Plot     : req.body.Plot,
 	})
 		movie.save(function(err, savedMovie) {
+			console.log("This shit is working!")
 			res.send(savedMovie)
 	})
 };

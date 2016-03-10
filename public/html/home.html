@@ -43,21 +43,38 @@
             					<li><a href="signIn">Sign In</a></li>
             					<li><a href="register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-            					<li><a href="premium">Premium Membership</a></li>
-          					</ul>
+								<li><a href="logout">Log Out</a></li>          					
+							</ul>
           				</li>
       				</ul>
-     			<form class="navbar-form navbar-right" role="search">
+     			<form ng-model="search.search" ng-submit="searchQuery()" type="submit" class="navbar-form navbar-right" role="search">
         			<div class="form-group">
           				<input type="text" class="form-control" placeholder="Search">
         			</div>
-        			<button type="submit" class="btn btn-default">Submit</button>
+        			<button id="search" type="submit" class="btn btn-default">Submit</button>
       			</form>
     			</div>
   			</div>
 		</nav>
-		<h2>{{greeting}}</h2>
 		<br>
+		<h2>{{search.search}}</h2>
+		<br>
+		<h2 align="center">{{greeting}}</h2>
+		<br>
+		<h2>Movies</h2>
+		<div ng-repeat="movie in movies" id="movies" class="list-unstyled container">
+      		<ul>
+       			<li><strong>Title: </strong> {{movie.Title}}</li>
+       	 		<li><strong>Year: </strong>{{movie.Year}}</li>
+        		<li><strong>Rated: </strong> {{movie.Rated}}</li>
+        		<li><strong>Released: </strong> {{movie.Released}}</li>
+        		<li><strong>Runtime: </strong>{{movie.Runtime}}</li>
+        		<li><strong>Genre: </strong>{{movie.Genre}}</li>
+        		<li><strong>Director: </strong>{{movie.Director}}</li>
+        		<li><strong>Actors: </strong>{{movie.Actors}}</li>
+        		<li><strong>Plot: </strong>{{movie.Plot}}</li>
+      		</ul>
+    	</div>
 		<br>
 		<a href="movies">Movie List!</a>
 		<div class="container topRated">
@@ -80,6 +97,16 @@
 				</ul>
 			</div>
 		</div>
+
+
+	<div class="container">
+    	<div class="row">
+      		<div class="container input-field col s12">
+        		<span>{{search.search}}</span>
+        		<input ng-model="search.search" ng-change="searchQuery()" id="search" type="search" placeholder="Search">
+      		</div>
+    	</div>
+  	</div>
 
 	</body>
 
