@@ -16,6 +16,8 @@
 
 		<link rel="stylesheet" type="text/css" href="../css/home.css">
 
+		<link href='https://fonts.googleapis.com/css?family=Spicy+Rice' rel='stylesheet' type='text/css'>
+
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
@@ -33,6 +35,7 @@
  			<div class="container">
  			    <div>
     	  			<ul class="nav navbar-nav">
+    	  				<li><a href="/">Home</a></li>
         				<li><a href="new">Coming Releases</a></li>
         				<li><a href="about">How The Appleometer Works</a></li>
         				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
@@ -43,27 +46,48 @@
             					<li><a href="signIn">Sign In</a></li>
             					<li><a href="register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-            					<li><a href="logout">Log Out</a></li>
-          					</ul>
+								<li><a href="logout">Log Out</a></li>          					
+							</ul>
           				</li>
       				</ul>
-     			<form class="navbar-form navbar-right" role="search">
+     			<form ng-submit="searchQuery()" class="navbar-form navbar-right" role="search">
         			<div class="form-group">
-          				<input type="text" class="form-control" placeholder="Search">
+          				<input ng-model="search.search" type="text" class="form-control" placeholder="Search">
         			</div>
-        			<button type="submit" class="btn btn-default">Submit</button>
+        			<button type="submit" class="btn btn-primary">Submit</button>
       			</form>
     			</div>
   			</div>
 		</nav>
-		<h2 align="center">{{greeting}}</h2>
-		<h3 align="right">Hey there {{user.username}}!</h3>
+		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
+			<br>
+			<a href="api/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
+			<h2 class="movieInfo"><a href="api/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+			<br>
+			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Rated: </strong>{{searchResult.Rated}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Plot: </strong>{{searchResult.Plot}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Genre: </strong>{{searchResult.Genre}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Director: </strong>{{searchResult.Director}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Actors: </strong>{{searchResult.Actors}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Released: </strong>{{searchResult.Released}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Runtime: </strong>{{searchResult.Runtime}}</h4><br>
+			<br>
+		</div>	
 		<br>
+		<div class="container pageContainer">
+    	<br> 
+		<h1 align="middle">Welcome back, {{user.username}}!</h1>
 		<br>
-		<a href="movies">Movie List!</a>
-		<div class="container topRated">
-			<h2 align="center">Highest Appleometer Rated Films</h2>
 		</div>
+		<br>
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
 				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>

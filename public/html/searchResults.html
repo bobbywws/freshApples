@@ -4,17 +4,19 @@
 
 	<head>
 
-		<title>Movies</title>
+		<title>Fresh Apples</title>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
 
 		<script type="text/javascript" src="../js/moviesApp.js"></script>
 
-		<script type="text/javascript" src="../js/moviesApp.dataController.js"></script>
+		<script type="text/javascript" src="../js/moviesApp.mainController.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
 
 		<link rel="stylesheet" type="text/css" href="../css/home.css">
+
+		<link href='https://fonts.googleapis.com/css?family=Spicy+Rice' rel='stylesheet' type='text/css'>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 
@@ -22,8 +24,8 @@
 
 	</head>
 
-	<body ng-controller="dataController">
-	
+	<body ng-controller="mainController">
+
 		<div class="container header">
 			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
 			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
@@ -44,36 +46,49 @@
             					<li><a href="signIn">Sign In</a></li>
             					<li><a href="register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-            					<li><a href="logout">Log Out</a></li>
-          					</ul>
+								<li><a href="logout">Log Out</a></li>          					
+							</ul>
           				</li>
       				</ul>
-     			<form ng-model="search.search" ng-submit="searchQuery()" type="submit" class="navbar-form navbar-right" role="search">
+     			<form ng-submit="searchQuery()" class="navbar-form navbar-right" role="search">
         			<div class="form-group">
-          				<input type="text" class="form-control" placeholder="Search">
+          				<input ng-model="search.search" type="text" class="form-control" placeholder="Search">
         			</div>
-        			<button id="search" type="submit" class="btn btn-default">Submit</button>
+        			<button type="submit" class="btn btn-primary">Submit</button>
       			</form>
     			</div>
   			</div>
 		</nav>
+		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
+			<br>
+			<a href="api/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
+			<h2 class="movieInfo"><a href="api/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+			<br>
+			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Rated: </strong>{{searchResult.Rated}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Plot: </strong>{{searchResult.Plot}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Genre: </strong>{{searchResult.Genre}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Director: </strong>{{searchResult.Director}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Actors: </strong>{{searchResult.Actors}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Released: </strong>{{searchResult.Released}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Runtime: </strong>{{searchResult.Runtime}}</h4><br>
+			<br>
+		</div>	
 		<br>
-		<h1 align="center">Movies</h1>
-		<div ng-repeat="movie in movies" id="movies" class="list-unstyled container">
-      		<ul>
-       			<li><strong>Title: </strong> {{movie.Title}}</li>
-       	 		<li><strong>Year: </strong>{{movie.Year}}</li>
-        		<li><strong>Rated: </strong> {{movie.Rated}}</li>
-        		<li><strong>Released: </strong> {{movie.Released}}</li>
-        		<li><strong>Runtime: </strong>{{movie.Runtime}}</li>
-        		<li><strong>Genre: </strong>{{movie.Genre}}</li>
-        		<li><strong>Director: </strong>{{movie.Director}}</li>
-        		<li><strong>Actors: </strong>{{movie.Actors}}</li>
-        		<li><strong>Plot: </strong>{{movie.Plot}}</li>
-      		</ul>
-    	</div>
-
-
+		<div class="container pageContainer">
+    	<br> 
+		<div>
+			<h2 align="center">Search Results</h2>
+		</div>
+		</div>
+		<br>
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
 				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>

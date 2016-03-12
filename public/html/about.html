@@ -4,7 +4,7 @@
 
 	<head>
 
-		<title>About</title>
+		<title>Fresh Apples</title>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.js"></script>
 
@@ -15,6 +15,8 @@
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.css">
 
 		<link rel="stylesheet" type="text/css" href="../css/home.css">
+
+		<link href='https://fonts.googleapis.com/css?family=Spicy+Rice' rel='stylesheet' type='text/css'>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 
@@ -27,7 +29,7 @@
 		<div class="container header">
 			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
 			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
-			<a href="https://www.netflix.com"><img src="../images/netflix.png" alt="Netflix Ad" class="adPic3"></a>
+			<a href="https://www.fandango.com"><img src="../images/fandango.jpg" alt="Fandango Ad" class="adPic3"></a>
 		</div>
 		<nav class="navbar navbar-default">
  			<div class="container">
@@ -44,36 +46,64 @@
             					<li><a href="signIn">Sign In</a></li>
             					<li><a href="register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-            					<li><a href="logout">Log Out</a></li>
-          					</ul>
+								<li><a href="logout">Log Out</a></li>          					
+							</ul>
           				</li>
       				</ul>
-     			<form class="navbar-form navbar-right" role="search">
+     			<form ng-submit="searchQuery()" class="navbar-form navbar-right" role="search">
         			<div class="form-group">
-          				<input type="text" class="form-control" placeholder="Search">
+          				<input ng-model="search.search" type="text" class="form-control" placeholder="Search">
         			</div>
-        			<button type="submit" class="btn btn-default">Submit</button>
+        			<button type="submit" class="btn btn-primary">Submit</button>
       			</form>
     			</div>
   			</div>
 		</nav>
-		<br>
-		<div class="container topRated">
-			<h2 align="center">About Us</h2>
-		</div>
-		<br>
-		<h3 align="center" class="container">Fresh Apples is a totally original, brand new idea from the creators of Sports Viewer, in which you can search for movies that you have wanted to see, and get The Appleometer rating – a rating based on the published opinions of hundreds of film and television critics. The Appleometer is a trusted measurement of movie quality for millions of moviegoers. It represents the percentage of professional critic reviews that are positive for a given film. And I totally didn't steal this from Rotten Tomatoes website, I promise.</h3>
-		<br>
-		<div class="container">
-			<img class="container freshness" src="../images/apple.jpg">
-			<h3><strong>The Apple: </strong>The Appleometer is 60% or higher. This means that the movie is at least average, based upon very famous critics who have viewed the film, and immediately rushed to Fresh Apples to be able to review it.</h3>
+		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
 			<br>
+			<a href="api/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
+			<h2 class="movieInfo"><a href="api/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
 			<br>
-			<img class="container freshness" src="../images/worm.png">
-			<h3><strong>The Worm: </strong>The Appleometer is 59% or lower. This means that this movie is so bad, that our famous critics wanted to forget it as fast as they saw it. If they are like me, they may have not even finished the film. The only resolve they had was to come straight to Fresh Apples and give it a horrible review, to hopefully save your life one day. God bless thee brave souls.</h3>
+			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
 			<br>
+			<h4 class="movieInfo"><strong>Rated: </strong>{{searchResult.Rated}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Plot: </strong>{{searchResult.Plot}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Genre: </strong>{{searchResult.Genre}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Director: </strong>{{searchResult.Director}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Actors: </strong>{{searchResult.Actors}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Released: </strong>{{searchResult.Released}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Runtime: </strong>{{searchResult.Runtime}}</h4><br>
 			<br>
 		</div>	
+		<div class="container pageContainer">
+		<br>	
+		<div>
+			<h1 align="center">About Us</h1>
+		</div>
+		<br>
+		<h3>Fresh Apples is a totally original, super groovy idea from the creators of Sports Viewer, in which you can search for movies that you have wanted to see, and get The Appleometer rating – a rating based on the published opinions of hundreds of film and television critics. The Appleometer is a trusted measurement of movie quality for millions of moviegoers. It represents the percentage of professional critic reviews that are positive for a given film. And I totally didn't steal this from Rotten Tomatoes website, I promise.</h3>
+		<br>
+		<hr>
+		<br>
+		<div>
+			<img class="freshness" src="../images/apple.jpg">
+			<h2 class="freshText">The Apple: </h2><h3 class="freshText">The Appleometer is 60% or higher. This means that the movie is at least average, based upon very famous critics who have viewed the film, and immediately rushed to Fresh Apples to be able to review it.</h3>
+		</div>	
+		<br>
+		<br>
+		<div>
+			<img class="freshness" src="../images/worm.png">
+			<h2 class="freshText">The Worm: </h2><h3 class="freshText">The Appleometer is 59% or lower. This means that this movie is so bad, that our famous critics wanted to forget it as fast as they saw it. If they are like me, they may have not even finished the film. The only resolve they had was to come straight to Fresh Apples and give it a horrible review, to hopefully save your life one day. God bless thee brave souls.</h3>
+		</div>	
+		<br>
+	</div>
+		<br>	
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
 				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>

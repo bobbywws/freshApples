@@ -1,7 +1,7 @@
 var Movie = require("../models/data.js");
 
 function createMovie (req, res) {
-	var movie = new movie({
+	var movie = new Movie({
 		Title    : req.body.Title,
 		Year     : +req.body.Year,
 		Rated    : req.body.Rated,
@@ -9,12 +9,16 @@ function createMovie (req, res) {
 		Runtime  : req.body.Runtime,
 		Genre    : req.body.Genre,
 		Director : req.body.Director,
-		Actors   : req.body.Actors.split(", "),
+		Actors   : req.body.Actors,
 		Plot     : req.body.Plot,
+		Poster   : req.body.Poster,
 	})
 		movie.save(function(err, savedMovie) {
-			console.log("This shit is working!")
-			res.send(savedMovie)
+			if (err) {
+			console.log("Error!", err) }
+			else {
+			console.log("Success", savedMovie)	
+			res.send(savedMovie)}
 	})
 };
 

@@ -93,11 +93,34 @@ app.isAuthenticatedName = function(req, res, next){
 
 
 
-// Routes \\
+// Data Routes \\
 var searchController = require("./controllers/searchCtrl.js");
 
-app.post('/api/movies', searchController.search)
+app.post('/api/movies', searchController.search);
 
+app.post('/api/actors', searchController.searchActors);
+
+app.post('/api/directors', searchController.searchDirectors);
+
+app.get("/searchResults", function(req, res){
+    res.sendFile("searchResults.html", {root : "./public/html"})
+});
+
+var dataController = require("./controllers/dataCtrl.js");
+
+app.post("/api/movies/createMovie", dataController.createMovie);
+
+app.get("/api/movies", dataController.getMovies);
+
+app.get("/movies/:movieID", function(req, res){
+    res.sendFile("foundMovie.html", {root : "./public/html"})
+});
+
+app.get("/api/movies/:movieID", dataController.getMovies);
+
+app.get("/api/users", app.isAuthenticatedAjax, function(req, res){
+    res.send({user:req.user})
+});
 
 app.get("/", function(req, res){
 	res.sendFile("home.html", {root : "./public/html"})
@@ -105,10 +128,6 @@ app.get("/", function(req, res){
 
 app.get("/dashboard", app.isAuthenticated, function(req, res){
     res.sendFile("/html/dashboard.html", {root: "./public"})
-})
-
-app.get("/api/users", app.isAuthenticatedAjax, function(req, res){
-    res.send({user:req.user})
 })
 
 app.get("/new", function(req, res){
@@ -174,29 +193,6 @@ app.get("/logout", function(req, res){
 
 app.get("/contact", function(req, res){
 	res.sendFile("contact.html", {root : "./public/html"})
-});
-
-app.get("/movies", function(req, res){
-	res.sendFile("movies.html", {root : "./public/html"})
-});
-
-var controller = require("./controllers/dataCtrl.js");
-
-app.get("/api/movies", controller.getMovies)
-
-app.get("/api/movies/:movieID", controller.getMovies)
-
-app.post("/api/movies", controller.createMovie);
-
-app.get("/movies", function(req, res){
-	console.log(req.body);
-	res.sendFile("movies.html", {root : "./public/html"});
-});
-
-app.post("/movie", function(req, res){
-
-	res.sendFile("html/added.html", {root : "./public"});
-	console.log(req.body);
 });
 
 

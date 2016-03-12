@@ -4,10 +4,12 @@ body {
 
 h1 {
 	margin: 0px;
+	font-family: 'Spicy Rice', cursive;
 }
 
 h2 {
 	margin: 0px;
+	font-family: 'Spicy Rice', cursive;
 }
 
 .header {
@@ -78,6 +80,42 @@ h2 {
 }
 
 .freshness {
+	border-radius: 10px;
 	width: 150px;
 	height: 100px;
+	float: left;
+	display: inline;
+	padding-right: 25px;
+}
+
+.freshText {
+	display: inline;
+}
+
+.movieContainer {
+	background-color: #d6e5f0;
+}
+
+.moviePoster {
+	height: 425px;
+	width: 325px;
+	float: left;
+	display: inline;
+	padding-right: 25px;
+}
+
+.movieInfo {
+	display: inline;
+}
+
+.movieInfoTitle {
+	color: black;	
+}
+
+.spaceFiller {
+	height: 175px;
+}
+
+.pageContainer {
+	background-color: #d6e5f0;
 }

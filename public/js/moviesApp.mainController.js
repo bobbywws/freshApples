@@ -1,11 +1,13 @@
 angular.module("MoviesApp")
 	.controller("mainController", ["$scope", "$http", function($scope, $http){
 
-		$scope.greeting = "Fresh Apples Welcomes You!";
+		$scope.greeting = "Fresh Apples... Groovy, Man";
 
-			$scope.createMovie = function(){
-			$http.post("/api/movies", $scope.newMovie)
+		$scope.createMovie = function(){
+            console.log("Posting createMovie")
+			$http.post("/api/movies/createMovie", $scope.newMovie)
 				.then(function(returnData) {
+                    console.log("returnData", returnData)
 					$scope.movies = $scope.movies || []
 					$scope.movies.push(returnData.data)
 					$scope.newMovie = {}
@@ -29,8 +31,8 @@ angular.module("MoviesApp")
 
         $scope.signIn = function(){
             $http({
-                method : 'POST',
-                url    : '/signIn',
+                method : "POST",
+                url    : "/signIn",
                 data   : $scope.loginForm
             }).then(function(returnData){
                 if ( returnData.data.success ) { window.location.href="/dashboard" } 
@@ -42,8 +44,8 @@ angular.module("MoviesApp")
         }
 
         $http({
-            method : 'GET',
-            url    : '/api/users',
+            method : "GET",
+            url    : "/api/users",
         }).then(function(returnData){
             console.log(returnData)
             if ( returnData.data.user ) {
@@ -52,20 +54,33 @@ angular.module("MoviesApp")
         }) 
 
         $scope.search = {search : ""}
-            $scope.searchQuery = function(){
-                console.log('change documented')
-                $http({
-                    method: 'POST',
-                    url   : 'api/movies',
-                    data  : $scope.search
-                }).then(function(returnData, err){
-                    $scope.searchResults = returnData.data.data
-                    console.log($scope.searchResults, err)
-                })
-            }
+
+        $scope.searchQuery = function(){
+            $http.post("api/movies", $scope.search)                
+                .then(function(returnData, err){
+                    $scope.searchResults = returnData.data
+                })      
+            // $http.post("api/actors", $scope.search) 
+            //     .then(function(returnData, err){
+            //         $scope.searchResults = returnData.data
+            //     })      
+            // $http.post("api/directors", $scope.search)
+            //     .then(function(returnData, err){
+            //         $scope.searchResults = returnData.data
+            //     })     
+            $scope.search = {}    
+        }  
+
+        var movieID = window.location.pathname.split("/").pop();
+
+        $http.get("/api/movies/" + movieID)
+            .then(function(serverResponse) {
+                $scope.movie = serverResponse.data
+        })
+            
         $http.get("/api/movies")
-			.then(function(returnData) {
-				console.log("Get : ", returnData)
-				$scope.movies = returnData.data
-			})    
+            .then(function(returnData) {
+                console.log("Get : ", returnData)
+                $scope.movies = returnData.data
+            })         
 	}]);
