@@ -59,10 +59,17 @@
     			</div>
   			</div>
 		</nav>
+		<br>
+		<div class="container pageContainer">	
+			<br>
+			<h2 align="center">Search Results</h2>
+			<br>
+		</div>
+		<br>	
 		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
 			<br>
-			<a href="api/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
-			<h2 class="movieInfo"><a href="api/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+			<a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
+			<h2 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
 			<br>
 			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
 			<br>
@@ -81,14 +88,7 @@
 			<h4 class="movieInfo"><strong>Runtime: </strong>{{searchResult.Runtime}}</h4><br>
 			<br>
 		</div>	
-		<br>
-		<div class="container pageContainer">
     	<br> 
-		<div>
-			<h2 align="center">Search Results</h2>
-		</div>
-		</div>
-		<br>
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
 				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>

@@ -55,6 +55,10 @@ h2 {
 	display: inline;
 }
 
+.searchText {
+	color: white;
+}
+
 .main {
 	background-color: gray;
 	color: black;
@@ -118,4 +122,16 @@ h2 {
 
 .pageContainer {
 	background-color: #d6e5f0;
+}
+
+.commentStream {
+	background-color: #d6e5f0;
+}
+
+.commentsBody {
+	background-color: white;
+}
+
+.usersBody {
+	
 }

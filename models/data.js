@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var DB = require("../models/comments.js");
 
 var moviesSchema = mongoose.Schema({
 	Title    : String,
@@ -11,6 +12,7 @@ var moviesSchema = mongoose.Schema({
 	Actors   : String,
 	Plot     : String,
 	Poster   : String,
+	Comment  : [{type : mongoose.Schema.ObjectId, ref : "Comment"}], 
 });
 
 module.exports = mongoose.model("Movie", moviesSchema);

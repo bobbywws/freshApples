@@ -61,8 +61,8 @@
 		</nav>
 		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
 			<br>
-			<a href="api/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
-			<h2 class="movieInfo"><a href="api/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+			<a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
+			<h2 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
 			<br>
 			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
 			<br>
@@ -84,9 +84,15 @@
 		<br>
 		<div class="container pageContainer">
     	<br> 
-		<div>
-			<h2 align="center">Contact Us</h2>
-		</div>
+			<div>
+				<h2 align="center">Contact Us</h2>
+			</div>
+			<div>
+				<h3 align="center">Call Us (Toll Free, of Course!): 1-800-NAH-STFU</h3>
+				<h3 align="center">Email Us: originalideas@fake.com</h3>
+				<h3 align="center">Write To Us (We Love Fan Mail, and Hate Mail Even More!):</h3>
+				<h3 align="center">12 Tribes Avenue, Tel Aviv, Israel, 11111</h3>
+			</div>
 		</div>
 		<br>
 		<div class="row container-fluid footer">

@@ -61,8 +61,8 @@
     </nav>
     <div ng-repeat="searchResult in searchResults" class="container movieContainer">
       <br>
-      <a href="api/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
-      <h2 class="movieInfo"><a href="api/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+      <a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
+      <h2 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
       <br>
       <h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
       <br>

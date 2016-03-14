@@ -8,6 +8,7 @@ var LocalStrategy = require("passport-local").Strategy;
 var session = require("express-session");
 var bcrypt = require("bcryptjs");
 var app = express();
+var DB = require("./models/comments.js");
 
 
 
@@ -28,17 +29,18 @@ app.use(app.sessionMiddleware)
 // Connect Mongo \\
 mongoose.connect("mongodb://localhost/freshApples")
 
-var userSchema = mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-});
-var User = mongoose.model("user", userSchema);
+var User = DB.User;
 
 
 
 // Connect Passport \\
 app.use(passport.initialize());
 app.use(passport.session());
+
+var userSchema = mongoose.Schema({
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+});
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
@@ -91,63 +93,12 @@ app.isAuthenticatedName = function(req, res, next){
     res.redirect('/');
 }
 
-
-
-// Data Routes \\
-var searchController = require("./controllers/searchCtrl.js");
-
-app.post('/api/movies', searchController.search);
-
-app.post('/api/actors', searchController.searchActors);
-
-app.post('/api/directors', searchController.searchDirectors);
-
-app.get("/searchResults", function(req, res){
-    res.sendFile("searchResults.html", {root : "./public/html"})
-});
-
-var dataController = require("./controllers/dataCtrl.js");
-
-app.post("/api/movies/createMovie", dataController.createMovie);
-
-app.get("/api/movies", dataController.getMovies);
-
-app.get("/movies/:movieID", function(req, res){
-    res.sendFile("foundMovie.html", {root : "./public/html"})
-});
-
-app.get("/api/movies/:movieID", dataController.getMovies);
-
 app.get("/api/users", app.isAuthenticatedAjax, function(req, res){
     res.send({user:req.user})
 });
 
-app.get("/", function(req, res){
-	res.sendFile("home.html", {root : "./public/html"})
-});
-
-app.get("/dashboard", app.isAuthenticated, function(req, res){
-    res.sendFile("/html/dashboard.html", {root: "./public"})
-})
-
-app.get("/new", function(req, res){
-	res.sendFile("new.html", {root : "./public/html"})
-});
-
-app.get("/about", function(req, res){
-	res.sendFile("about.html", {root : "./public/html"})
-});
-
-app.get("/add", function(req, res){
-	res.sendFile("add.html", {root : "./public/html"})
-});
-
-app.get("/added", function(req, res){
-	res.sendFile("added.html", {root : "./public/html"})
-});
-
 app.get("/signIn", function(req, res){
-	res.sendFile("login.html", {root : "./public/html"})
+    res.sendFile("login.html", {root : "./public/html"})
 });
 
 app.post("/signIn", function(req, res, next){
@@ -162,7 +113,7 @@ app.post("/signIn", function(req, res, next){
 })
 
 app.get("/register", function(req, res){
-	res.sendFile("register.html", {root : "./public/html"})
+    res.sendFile("register.html", {root : "./public/html"})
 });
 
 app.post("/register", function(req, res){
@@ -189,6 +140,76 @@ app.post("/register", function(req, res){
 app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/");
+});
+
+app.get('/api/users/me',
+  passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json({ id: req.user.id, username: req.user.username });
+  });
+
+
+
+// Search Routes \\
+var searchController = require("./controllers/searchCtrl.js");
+
+app.post('/api/movies', searchController.search);
+
+app.post('/api/actors', searchController.searchActors);
+
+app.post('/api/directors', searchController.searchDirectors);
+
+app.get("/searchResults", function(req, res){
+    res.sendFile("searchResults.html", {root : "./public/html"})
+});
+
+
+
+// Data Routes \\
+var dataController = require("./controllers/dataCtrl.js");
+
+app.post("/api/movies/createMovie", dataController.createMovie);
+
+app.get("/movies/:movieID", function(req, res){
+    res.sendFile("foundMovie.html", {root : "./public/html"})
+});
+
+app.get("/api/movies/:movieID", dataController.getMovies);
+
+
+
+// Comment Routes \\
+var commentController = require("./controllers/commentCtrl.js");
+
+app.post("/api/comments/createComment", commentController.createComment);
+
+app.get("/api/comments", commentController.getComments);
+
+
+
+// Regular Routes \\
+app.get("/", function(req, res){
+	res.sendFile("home.html", {root : "./public/html"})
+});
+
+app.get("/dashboard", app.isAuthenticated, function(req, res){
+    res.sendFile("/html/dashboard.html", {root: "./public"})
+})
+
+app.get("/new", function(req, res){
+	res.sendFile("new.html", {root : "./public/html"})
+});
+
+app.get("/about", function(req, res){
+	res.sendFile("about.html", {root : "./public/html"})
+});
+
+app.get("/add", function(req, res){
+	res.sendFile("add.html", {root : "./public/html"})
+});
+
+app.get("/added", function(req, res){
+	res.sendFile("added.html", {root : "./public/html"})
 });
 
 app.get("/contact", function(req, res){

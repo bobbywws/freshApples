@@ -36,21 +36,21 @@
  			    <div>
     	  			<ul class="nav navbar-nav">
     	  				<li><a href="/">Home</a></li>
-        				<li><a href="new">Coming Releases</a></li>
-        				<li><a href="about">How The Appleometer Works</a></li>
+        				<li><a href="../new">Coming Releases</a></li>
+        				<li><a href="../about">How The Appleometer Works</a></li>
         				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
-        				<li><a href="add">Add A Movie</a></li>
+        				<li><a href="../add">Add A Movie</a></li>
         				<li class="dropdown">
           				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sign In/Register <span class="caret"></span></a>
           					<ul class="dropdown-menu">
-            					<li><a href="signIn">Sign In</a></li>
-            					<li><a href="register">Register</a></li>
+            					<li><a href="../signIn">Sign In</a></li>
+            					<li><a href="../register">Register</a></li>
         	    				<li role="separator" class="divider"></li>
-								<li><a href="logout">Log Out</a></li>          					
+								<li><a href="../logout">Log Out</a></li>          					
 							</ul>
           				</li>
       				</ul>
-     			<form ng-submit="searchQuery()" class="navbar-form navbar-right" role="search">
+     			<form ng-submit="searchQueryForIDPage()" class="navbar-form navbar-right" role="search">
         			<div class="form-group">
           				<input ng-model="search.search" type="text" class="form-control" placeholder="Search">
         			</div>
@@ -105,6 +105,26 @@
 			<br>
 			<br>
 		</div>	
+		<br>
+		<div ng-repeat="comment in comments" class="container commentStream">
+			<div class="commentsBody">
+				<h3>{{comment.Body}}</h3>
+				<p>{{comment.User}}</p>
+			</div>
+		</div>
+		<br>
+		<div class="container commentBox">
+			<form ng-submit="createComment()">
+				<div>
+          			<input ng-model="newComment.Body" name="comment" placeholder="Write Comments Here: " class="form-control"></input>
+    				<!-- <input ng-model="newComment.User" name="user" placeholder="User Name: " class="form-control"></input> -->
+        		</div>
+        		<div>
+        			<br>
+        			<input type="submit" class="btn btn-primary addSubmit"/>
+        		</div>
+			</form>
+		</div>
 		<br>
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
