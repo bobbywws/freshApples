@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
-var Comment = require("../models/comments.js");
+var DB = require("../models/comments.js");
 
-var moviesSchema = mongoose.Schema({
+var newsSchema = mongoose.Schema({
 	Title    : String,
 	Year     : Number,
 	Rated    : String,
@@ -12,7 +12,7 @@ var moviesSchema = mongoose.Schema({
 	Actors   : String,
 	Plot     : String,
 	Poster   : String,
-	Comment  : {type : mongoose.Schema.ObjectId, ref : "Comment"},
+	Comment  : [{type : mongoose.Schema.ObjectId, ref : "Comment"}], 
 });
 
-module.exports = mongoose.model("Movie", moviesSchema);
+module.exports = mongoose.model("New", newsSchema);

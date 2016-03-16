@@ -1,7 +1,10 @@
 var Movie = require("../models/data.js");
+var Comment = require("../models/comments.js");
 
 function createMovie (req, res) {
+
 	var movie = new Movie({
+
 		Title    : req.body.Title,
 		Year     : +req.body.Year,
 		Rated    : req.body.Rated,
@@ -13,12 +16,14 @@ function createMovie (req, res) {
 		Plot     : req.body.Plot,
 		Poster   : req.body.Poster,
 	})
-		movie.save(function(err, savedMovie) {
-			if (err) {
-			console.log("Error!", err) }
-			else {
+	movie.save(function(err, savedMovie) {
+		if (err) {
+			console.log("Error!", err)
+		}
+		else {
 			console.log("Success", savedMovie)	
-			res.send(savedMovie)}
+			res.send(savedMovie)
+		}
 	})
 };
 

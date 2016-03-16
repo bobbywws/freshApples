@@ -18,6 +18,8 @@
 
 		<link href='https://fonts.googleapis.com/css?family=Spicy+Rice' rel='stylesheet' type='text/css'>
 
+		<link href='https://fonts.googleapis.com/css?family=Economica:700' rel='stylesheet' type='text/css'>
+
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.js"></script>
@@ -26,7 +28,7 @@
 
 	<body ng-controller="mainController">
 
-		<div class="container header">
+		<div class="container-flow header" align="center">
 			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
 			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
 			<a href="https://www.regmovies.com/crown-club"><img src="../images/regalcc.png" alt="Regal Crown Club Ad" class="adPic3"></a>
@@ -36,7 +38,7 @@
  			    <div>
     	  			<ul class="nav navbar-nav">
     	  				<li><a href="/">Home</a></li>
-        				<li><a href="new">Coming Releases</a></li>
+        				<li><a href="news">Coming Releases</a></li>
         				<li><a href="about">How The Appleometer Works</a></li>
         				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
         				<li><a href="add">Add A Movie</a></li>
@@ -59,7 +61,10 @@
     			</div>
   			</div>
 		</nav>
-		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
+		<div class="container pageContainer">	
+		<br>
+		<h1 align="center">Coming Releases</h1>
+		<div ng-repeat="searchResult in searchResults" class="movieContainer">
 			<br>
 			<a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
 			<h2 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
@@ -80,13 +85,36 @@
 			<br>
 			<h4 class="movieInfo"><strong>Runtime: </strong>{{searchResult.Runtime}}</h4><br>
 			<br>
+			<br>
+			<br>
 		</div>	
 		<br>
-		<div class="container pageContainer">
     	<br> 
-		<div>
-			<h2 align="center">Upcoming Movies</h2>
-		</div>
+		<div ng-repeat="new in news" class="movieContainer">
+			<img src="{{new.Poster}}" class="moviePoster">
+			<h2 class="movieInfo movieInfoTitle">{{new.Title}}</h2><br>
+			<br>
+			<h4 class="movieInfo"><strong>Year: </strong>{{new.Year}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Rated: </strong>{{new.Rated}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Plot: </strong>{{new.Plot}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Genre: </strong>{{new.Genre}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Director: </strong>{{new.Director}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Actors: </strong>{{new.Actors}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Released: </strong>{{new.Released}}</h4><br>
+			<br>
+			<h4 class="movieInfo"><strong>Runtime: </strong>{{new.Runtime}}</h4><br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		</div>	
 		</div>
 		<br>
 		<div class="row container-fluid footer">

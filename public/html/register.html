@@ -26,7 +26,7 @@
 
 	<body ng-controller="mainController">
 
-		<div class="container header">
+		<div class="container-flow header" align="center">
 			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
 			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
 			<a href="https://www.netflix.com"><img src="../images/netflix.png" alt="Netflix Ad" class="adPic3"></a>
@@ -36,7 +36,7 @@
  			    <div>
     	  			<ul class="nav navbar-nav">
     	  				<li><a href="/">Home</a></li>
-        				<li><a href="new">Coming Releases</a></li>
+        				<li><a href="news">Coming Releases</a></li>
         				<li><a href="about">How The Appleometer Works</a></li>
         				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
         				<li><a href="add">Add A Movie</a></li>
@@ -59,6 +59,7 @@
     			</div>
   			</div>
 		</nav>
+		<div class="container pageContainer">
 		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
 			<br>
 			<a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
@@ -82,17 +83,16 @@
 			<br>
 		</div>	
 		<br>
-		<div class="container pageContainer">
     	<br> 
 		<div>
-			<h2 align="center">Register</h2>
-			<h4 class="container" align="center">Registering allows you to create a profile on Fresh Apples, where you can add friends, post reviews, or even review other users reviews!</h4>
+			<h1 align="center">Register</h1>
+			<h4 align="center">Registering allows you to create a profile on Fresh Apples, where you can add friends, post reviews, or even review other users reviews!</h4>
 		</div>
 		<br>
 		<form align="center" ng-submit="register()">
-            <input type="text" ng-model="signupForm.username" placeholder="Username"/>
-            <input type="password" ng-model="signupForm.password" placeholder="Password"/>
-            <input type="submit"/>
+            <input type="text" ng-model="signupForm.username" placeholder="Username" class="userAccess"/>
+            <input type="password" ng-model="signupForm.password" placeholder="Password" class="userAccess"/>
+            <button type="submit" class="btn btn-primary">Sign Up</button>
         </form>
         <br>
     	</div>

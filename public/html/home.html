@@ -26,7 +26,7 @@
 
 	<body ng-controller="mainController">
 
-		<div class="container header">
+		<div class="container-flow header" align="center">
 			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
 			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
 			<a href="https://www.regmovies.com/crown-club"><img src="../images/regalcc.png" alt="Regal Crown Club Ad" class="adPic3"></a>
@@ -35,7 +35,7 @@
  			<div class="container">
  			    <div>
     	  			<ul class="nav navbar-nav">
-        				<li><a href="new">Coming Releases</a></li>
+        				<li><a href="news">Coming Releases</a></li>
         				<li><a href="about">How The Appleometer Works</a></li>
         				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
         				<li><a href="add">Add A Movie</a></li>
@@ -49,7 +49,7 @@
 							</ul>
           				</li>
       				</ul>
-     			<form ng-submit="searchQuery()" action="searchResults" method="GET" class="navbar-form navbar-right" role="search">
+     			<form ng-submit="searchQuery()" class="navbar-form navbar-right" role="search">
         			<div class="form-group">
           				<input ng-model="search.search" type="text" class="form-control" placeholder="Search">
         			</div>
@@ -58,10 +58,11 @@
     			</div>
   			</div>
 		</nav>
-		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
+		<div class="container pageContainer">
+		<div ng-repeat="searchResult in searchResults" class="movieContainer">
 			<br>
 			<a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
-			<h2 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+			<h1 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h1><br>
 			<br>
 			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
 			<br>
@@ -81,13 +82,14 @@
 			<br>
 		</div>	
 		<br>
-		<div class="container pageContainer">
+		<br>
     	<br> 
 		<h1 align="center">{{greeting}}</h1>
 		<br>
 		<br>
 		<div class="container">
 			<h2 align="center">Highest Appleometer Rated Films</h2>
+			<br>
 		</div>
 		</div>
 		<br>

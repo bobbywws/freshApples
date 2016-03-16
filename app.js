@@ -8,7 +8,6 @@ var LocalStrategy = require("passport-local").Strategy;
 var session = require("express-session");
 var bcrypt = require("bcryptjs");
 var app = express();
-var DB = require("./models/comments.js");
 
 
 
@@ -29,18 +28,18 @@ app.use(app.sessionMiddleware)
 // Connect Mongo \\
 mongoose.connect("mongodb://localhost/freshApples")
 
-var User = DB.User;
-
 
 
 // Connect Passport \\
-app.use(passport.initialize());
-app.use(passport.session());
-
 var userSchema = mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
 });
+
+var User = mongoose.model('user', userSchema);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser(function(user, done) {
     done(null, user.id);
@@ -97,6 +96,12 @@ app.get("/api/users", app.isAuthenticatedAjax, function(req, res){
     res.send({user:req.user})
 });
 
+app.get('/api/users/me',
+  passport.authenticate('basic', { session: false }),
+  function(req, res) {
+    res.json({ id: req.user.id, username: req.user.username });
+  });
+
 app.get("/signIn", function(req, res){
     res.sendFile("login.html", {root : "./public/html"})
 });
@@ -142,12 +147,6 @@ app.get("/logout", function(req, res){
   res.redirect("/");
 });
 
-app.get('/api/users/me',
-  passport.authenticate('basic', { session: false }),
-  function(req, res) {
-    res.json({ id: req.user.id, username: req.user.username });
-  });
-
 
 
 // Search Routes \\
@@ -181,9 +180,20 @@ app.get("/api/movies/:movieID", dataController.getMovies);
 // Comment Routes \\
 var commentController = require("./controllers/commentCtrl.js");
 
-app.post("/api/comments/createComment", commentController.createComment);
+app.post("/api/comments/createComment/:movieID", commentController.createComment);
 
-app.get("/api/comments", commentController.getComments);
+app.get("/api/comments/:movieID", commentController.getComments);
+
+
+
+// New Releases Rotes \\
+var newController = require("./controllers/newReleaseCtrl.js");
+
+app.get("/news", function(req, res){
+    res.sendFile("new.html", {root : "./public/html"})
+});
+
+app.get("/api/news", newController.getNews);
 
 
 
@@ -195,10 +205,6 @@ app.get("/", function(req, res){
 app.get("/dashboard", app.isAuthenticated, function(req, res){
     res.sendFile("/html/dashboard.html", {root: "./public"})
 })
-
-app.get("/new", function(req, res){
-	res.sendFile("new.html", {root : "./public/html"})
-});
 
 app.get("/about", function(req, res){
 	res.sendFile("about.html", {root : "./public/html"})

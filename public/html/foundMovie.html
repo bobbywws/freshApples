@@ -26,7 +26,7 @@
 
 	<body ng-controller="mainController">
 
-		<div class="container header">
+		<div class="container-flow header" align="center">
 			<a href="/"><img src="../images/logo.png" alt="Fresh Apples Logo" class="adPic1"></a>
 			<img src="../images/Drawing.png" alt="Fresh Apples Logo" class="adPic2">			
 			<a href="https://www.regmovies.com/crown-club"><img src="../images/regalcc.png" alt="Regal Crown Club Ad" class="adPic3"></a>
@@ -36,7 +36,7 @@
  			    <div>
     	  			<ul class="nav navbar-nav">
     	  				<li><a href="/">Home</a></li>
-        				<li><a href="../new">Coming Releases</a></li>
+        				<li><a href="../news">Coming Releases</a></li>
         				<li><a href="../about">How The Appleometer Works</a></li>
         				<li><a href="http://www.fandango.com">Showtimes Near You</a></li>
         				<li><a href="../add">Add A Movie</a></li>
@@ -59,10 +59,16 @@
     			</div>
   			</div>
 		</nav>
-		<div ng-repeat="searchResult in searchResults" class="container movieContainer">
+		<div class="container pageContainer">
+		<br>
+		<h1 align="center">We Found What You Were Looking For, Man</h1>
+		<h4 align="center">You can comment below, if that's your thang!</h4>
+		<br>
+		<div ng-repeat="searchResult in searchResults" class="movieContainer">
+			<br>
 			<br>
 			<a href="/movies/{{searchResult._id}}"><img src="{{searchResult.Poster}}" class="moviePoster"></a>
-			<h2 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h2><br>
+			<h1 class="movieInfo"><a href="/movies/{{searchResult._id}}" class="movieInfoTitle">{{searchResult.Title}}</a></h1><br>
 			<br>
 			<h4 class="movieInfo"><strong>Year: </strong>{{searchResult.Year}}</h4><br>
 			<br>
@@ -80,11 +86,16 @@
 			<br>
 			<h4 class="movieInfo"><strong>Runtime: </strong>{{searchResult.Runtime}}</h4><br>
 			<br>
+			<br>
+			<br>
+			<br>
 		</div>	
-		<div class="container movieContainer">
+		<div class="movieContainer">
 			<br>
 			<img src="{{movie.Poster}}" class="moviePoster">
 			<h2 class="movieInfo movieInfoTitle">{{movie.Title}}</h2><br>
+			<br>
+			<h4><strong>Rating: </strong>{{ratingAverage}}% <img ng-show="ratingAverage>59" src="../images/apple.jpg" class="appleMeter"><img ng-show="ratingAverage<60" src="../images/worm.png" class="appleMeter"></h4>
 			<br>
 			<h4 class="movieInfo"><strong>Year: </strong>{{movie.Year}}</h4><br>
 			<br>
@@ -103,35 +114,55 @@
 			<h4 class="movieInfo"><strong>Runtime: </strong>{{movie.Runtime}}</h4><br>
 			<br>
 			<br>
-			<br>
 		</div>	
 		<br>
-		<div ng-repeat="comment in comments" class="container commentStream">
-			<div class="commentsBody">
-				<h3>{{comment.Body}}</h3>
-				<p>{{comment.User}}</p>
+		<h2 align="center">Comments:</h2>
+		<br>
+		<div class="commentStream">
+			<br>
+			<br>
+			<div class="commentsBody" ng-repeat="comment in comments">
+				<h5>Posted By: {{comment.User}}, Rating: {{comment.Rating}} Stars</h5>
+				<h4>{{comment.Comment}}</h4>
+				<br>
 			</div>
+			<br>
+			<br>
 		</div>
 		<br>
-		<div class="container commentBox">
-			<form ng-submit="createComment()">
+		<h2 align="center">Rate This Flick!</h2>
+		<form ng-submit="createComment()">
+			<span class="star-rating">
+  				<input ng-model="newComment.Rating" type="radio" name="rating" value="1"><i></i>
+	  			<input ng-model="newComment.Rating" type="radio" name="rating" value="2"><i></i>
+  				<input ng-model="newComment.Rating" type="radio" name="rating" value="3"><i></i>
+  				<input ng-model="newComment.Rating" type="radio" name="rating" value="4"><i></i>
+  				<input ng-model="newComment.Rating" type="radio" name="rating" value="5"><i></i>
+			</span>
+			<br>
+			<br>
+			<div class="commentBox">
 				<div>
-          			<input ng-model="newComment.Body" name="comment" placeholder="Write Comments Here: " class="form-control"></input>
-    				<!-- <input ng-model="newComment.User" name="user" placeholder="User Name: " class="form-control"></input> -->
+          			<input ng-model="newComment.Comment" placeholder="Write Comments Here: " class="form-control">
+          			<br>
+					<input ng-model="newComment.User" placeholder="User Name: " class="form-control">
         		</div>
         		<div>
         			<br>
         			<input type="submit" class="btn btn-primary addSubmit"/>
+        			<br>
         		</div>
-			</form>
+			</div>
+		</form>
+		<br>
 		</div>
 		<br>
 		<div class="row container-fluid footer">
 			<div align="center" class="col-xs-12 col-lg-4">
-				<a href="contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>
+				<a href="../contact" type="button" class="btn btn-primary btn-lg footerLink">Contact Us</a>
 			</div>
 			<div align="center" class="col-xs-12 col-lg-4">
-				<a href="about" type="button" class="btn btn-primary btn-lg footerLink">About Us</a>
+				<a href="../about" type="button" class="btn btn-primary btn-lg footerLink">About Us</a>
 			</div>
 			<div align="center" class="col-xs-12 col-lg-4">
 				<ul>

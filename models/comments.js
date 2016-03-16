@@ -1,13 +1,14 @@
 var mongoose = require("mongoose");
+var Movie = require("../models/data.js");
+var Reply = require("../models/reply.js");
 
 var commentsSchema = mongoose.Schema({
-	User    : {type : mongoose.Schema.ObjectId, ref : "User"},
-	Body    : String,
+	MovieID : {type : mongoose.Schema.ObjectId, ref : "Movie"},
+	User    : String,
+	Comment : String,
+	Rating  : Number,
+	Date    : Date,
+	Reply   : {type : mongoose.Schema.ObjectId, ref : "Reply"},
 });
 
-var userSchema = mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-});
-
-module.exports = {Comment : mongoose.model("Comment", commentsSchema), User : mongoose.model("User", userSchema)};
+module.exports = mongoose.model("Comment", commentsSchema);
